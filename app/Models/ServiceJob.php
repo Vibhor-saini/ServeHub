@@ -4,6 +4,7 @@ namespace App\Models;
 
 use App\Models\Booking;
 
+
 use Illuminate\Database\Eloquent\Model;
 
 class ServiceJob extends Model
