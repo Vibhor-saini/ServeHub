@@ -10,9 +10,17 @@ Route::get('/', function () {
 });
 
 Route::get('/dashboard', function () {
+
     $userCount = User::count();
     $serviceCount = Service::count();
     $bookingCount = Booking::count();
 
-    return view('dashboard', compact('userCount', 'serviceCount', 'bookingCount'));
+    $services = Service::with('bookings.customer')->get();
+
+    return view('dashboard', compact(
+        'userCount',
+        'serviceCount',
+        'bookingCount',
+        'services'
+    ));
 });
