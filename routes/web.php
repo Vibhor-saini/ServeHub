@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
+use Illuminate\Support\Facades\Auth;
 use App\Models\User;
 use App\Models\Service;
 use App\Models\Booking;
@@ -15,6 +16,22 @@ Route::post('/login', [AuthController::class, 'login']);
 Route::post('/logout', [AuthController::class, 'logout']);
 
 Route::get('/dashboard', function () {
+
+
+    if (Auth::user()->role_id != 1) {
+
+        $role = Auth::user()->role_id;
+
+        if ($role == 2) {
+            return "Provider Dashboard (coming soon)";
+        }
+
+        if ($role == 3) {
+            return "Customer Dashboard (coming soon)";
+        }
+
+        return redirect('/login');
+    }
 
     $userCount = User::count();
     $serviceCount = Service::count();
