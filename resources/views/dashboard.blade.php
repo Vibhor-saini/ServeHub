@@ -1,6 +1,10 @@
 @extends('layouts.app')
 
 @section('content')
+<form method="POST" action="/logout">
+    @csrf
+    <button type="submit">Logout</button>
+</form>
 <h1>Dashboard</h1>
 
 <p>Total Users: {{ $userCount }}</p>
